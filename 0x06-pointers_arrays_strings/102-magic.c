@@ -1,6 +1,12 @@
-#include "main.h"
 #include <stdio.h>
+
+/**
+ * main_fun - concatenates two strings
+ * Return:char
+ */
+
 int main_fun(void)
+
 {
 int n;
 int a[5];
