@@ -1,6 +1,5 @@
-#include <stdio.h>
 #include "main.h"
-
+#include <stdio.h>
 int main_fun(void)
 {
 int n;
