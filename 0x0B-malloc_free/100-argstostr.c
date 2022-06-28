@@ -1,74 +1,55 @@
 #include "main.h"
-#include <stdlib.h>
-
 /**
- * wrdcnt - counts the number of words in a string
- * @s: string
- * Return: int of number of words
+ * argstostr - a function that concatenates all the arguments of your program
+ *@ac: count of args passed to the function
+ *@av:array of arguments
+ *
+ *Return: pointer to the new string
  */
-int wrdcnt(char *s)
-{
-int i, n = 0;
 
-for (i = 0; s[i]; i++)
+char *argstostr(int ac, char **av)
 {
-if (s[i] == ' ')
-{
-if (s[i + 1] != ' ' && s[i + 1] != '\0')
-n++;
-}
-else if (i == 0)
-n++;
-}
-n++;
-return (n);
-}
+char *new_string = NULL;
+int k = 0, i = ac, j, sum = 0, temp = 0;
 
-/**
- * strtow - splits a string into words
- * @str: string
- * Return: pointer to an array of strings
- */
-char **strtow(char *str)
-{
-int i, j, k, l, n = 0, ch = 0;
-char **x;
+if (ac == 0 || av == NULL)
+return (NULL);
 
-if (str == NULL || *str == '\0')
-return (NULL);
-n = wrdcnt(str);
-if (n == 1)
-return (NULL);
-x = (char **)malloc(n * sizeof(char *));
-if (x == NULL)
-return (NULL);
-x[n - 1] = NULL;
-i = 0;
-while (str[i])
+while (ac--)
+sum += (len(av[ac]) + 1);
+new_string = (char *) malloc(sum + 1);
+if (new_string != NULL)
 {
-if (str[i] != ' ' && (i == 0 || str[i - 1] == ' '))
+while (k < i)
 {
-for (j = 1; str[i + j] != ' ' && str[i + j]; j++)
-;
-j++;
-x[ch] = (char *)malloc(j * sizeof(char));
-j--;
-if (x[ch] == NULL)
-{
-for (k = 0; k < ch; k++)
-free(x[k]);
-free(x[n - 1]);
-free(x);
-return (NULL);
+for (j = 0; av[k][j] != '\0'; j++)
+new_string[j + temp] = av[k][j];
+new_string[temp + j] = '\n';
+temp += (j + 1);
+k++;
 }
-for (l = 0; l < j; l++)
-x[ch][l] = str[i + l];
-x[ch][l] = '\0';
-ch++;
-i += j;
+new_string[temp] = '\0';
 }
 else
-i++;
+{
+return (NULL);
 }
-return (x);
+return (new_string);
+}
+
+/**
+ *len - returns length of str
+ *@str: string counted
+ *Return: returns the length
+ */
+int len(char *str)
+{
+int len = 0;
+
+if (str != NULL)
+{
+while (str[len])
+len++;
+}
+return (len);
 }
